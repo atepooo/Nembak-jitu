@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Just For You</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-image: url('https://i.imgur.com/lALEkPC.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .backdrop {
+      backdrop-filter: blur(1px) brightness(50%);
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen px-4">
+  <div class="backdrop p-8 rounded-3xl shadow-2xl text-center max-w-md w-full text-white">
+    <h1 class="text-3xl font-semibold mb-4">Hey, You</h1>
+    <p class="text-lg italic mb-6">
+      "We've been more than friends for a while now...<br>
+      and every day with you feels right."
+    </p>
+    <p class="text-xl font-medium mb-6">So maybe it's time I ask—will you be mine, officially?</p>
+    <div class="flex justify-center gap-4">
+      <button onclick="jawab(true)" class="bg-white text-gray-800 font-semibold px-6 py-2 rounded-full hover:bg-gray-100 transition">
+        Yes 🤍
+      </button>
+      <button onclick="jawab(false)" class="border border-white text-white font-medium px-6 py-2 rounded-full hover:bg-white hover:text-gray-800 transition">
+        Not Sure
+      </button>
+    </div>
+    <p id="response" class="mt-6 text-lg font-semibold hidden"></p>
+  </div>
+
+  <script>
+    function jawab(mau) {
+      const response = document.getElementById("response");
+
+      if (mau) {
+        response.textContent = "You just made me the happiest person alive 🤍";
+        response.classList.remove("hidden");
+
+        // Kirim notifikasi WA otomatis via CallMeBot
+        fetch("https://api.callmebot.com/whatsapp.php?phone=6289652355671&text=Dia%20klik%20YES%20di%20lamanmu!&apikey=3333358");
+
+        // Redirect ke WA dia (opsional)
+        setTimeout(() => {
+          window.location.href = "https://wa.me/6289652355671?text=She%20clicked%20YES!";
+        }, 2000);
+      } else {
+        response.textContent = "It's okay. Just being honest with you means a lot to me.";
+        response.classList.remove("hidden");
+
+        // Kirim notifikasi WA otomatis via CallMeBot
+        fetch("https://api.callmebot.com/whatsapp.php?phone=6289652355671&text=Dia%20klik%20Not%20Sure%20di%20lamanmu.&apikey=3333358");
+
+        setTimeout(() => {
+          window.location.href = "https://wa.me/6289652355671?text=She%20clicked%20Not%20Sure...";
+        }, 2000);
+      }
+    }
+  </script>
+</body>
+</html>
